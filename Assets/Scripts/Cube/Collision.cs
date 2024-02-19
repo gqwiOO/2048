@@ -1,30 +1,28 @@
 using TMPro;
 using UnityEngine;
 
+
+[RequireComponent(typeof(PointsContainer))]
 public class Collision : MonoBehaviour
 {
-
-    [SerializeField] public float UpImpulse;
-
 
     private void OnCollisionEnter(UnityEngine.Collision collision)
     {
         if (collision.gameObject.name == "Cube(Clone)" && collision.gameObject.GetComponent<PointsContainer>().Value ==
             GetComponent<PointsContainer>().Value)
         {
-            Debug.Log("Collide!");
-
             Score.ScoreValue += collision.gameObject.GetComponent<PointsContainer>().Value / 2;
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up * UpImpulse, ForceMode.Impulse);
+            collision.gameObject.GetComponent<CubeImpulse>().SetUpImpulse();
 
-            GetComponent<Rigidbody>().AddForce(Vector3.up * UpImpulse, ForceMode.Impulse);
-            GetComponent<PointsContainer>().UpdateValue(); 
+            GetComponent<CubeImpulse>().SetUpImpulse();
+            GetComponent<CubeMaterials>().SetMaterial(GetComponent<PointsContainer>().Value * 2);
+            GetComponent<PointsContainer>().UpdateValue();
+
+            // Destroy another cube after collision
 
             Destroy(collision.gameObject);
+            CubeFactory.RemoveCube(collision.gameObject);
+
         }
-    }
-    void CheckIfWin(int value)
-    {
-        // TODO: Check if win with 2048 cube Value
     }
 }

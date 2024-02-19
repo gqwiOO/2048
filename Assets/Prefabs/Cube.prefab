@@ -392,6 +392,7 @@ GameObject:
   - component: {fileID: 526405196846352820}
   - component: {fileID: 8880159167801580520}
   - component: {fileID: 6524918740386092253}
+  - component: {fileID: 4910578934748708395}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -525,7 +526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d79b2cb0d1c5a62469bbefac10dd3b4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _impulse: 15
+  _ForwardImpulse: 15
+  _UpImpulse: 4
 --- !u!114 &526405196846352820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,7 +560,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc7c5f533166974397af30e4d8c4f76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UpImpulse: 0
 --- !u!114 &6524918740386092253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,6 +572,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7893c7bcb9828f489f683b3952ca25d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4910578934748708395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5777731955832875594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8007f86166247444aa56a3358e9a8925, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  material:
+  - Points: 2
+    Material: {fileID: 2100000, guid: 20d28c0afe0bfc544b5492b5ac45e55c, type: 2}
+  - Points: 4
+    Material: {fileID: 2100000, guid: bba66d5e33b7dea4581df4e837e3c2cb, type: 2}
+  - Points: 8
+    Material: {fileID: 2100000, guid: aaf4e0310be2dde4197364ad0d4f6ac2, type: 2}
+  - Points: 16
+    Material: {fileID: 2100000, guid: 4ec1fb4cbeb5dfc4a8bdd04cde46e772, type: 2}
+  - Points: 32
+    Material: {fileID: 2100000, guid: e0cd33b81482b8e4caab1598100ae3bc, type: 2}
+  - Points: 64
+    Material: {fileID: 2100000, guid: f1bed621c8f229a4981a58efce36df64, type: 2}
+  - Points: 128
+    Material: {fileID: 2100000, guid: ed55856e21fd06147b936d59691c7bd3, type: 2}
+  - Points: 256
+    Material: {fileID: 2100000, guid: 146d3203ab192ab4db5efef60c1419d0, type: 2}
+  - Points: 512
+    Material: {fileID: 2100000, guid: 8bce2745f53cd0343a38f539dafb06db, type: 2}
+  - Points: 1024
+    Material: {fileID: 2100000, guid: e7d75d33e452bee408049dac0ab5182e, type: 2}
+  - Points: 2048
+    Material: {fileID: 2100000, guid: 6b7263582ab130542ad936a996d06e50, type: 2}
 --- !u!1 &5896988031450780863
 GameObject:
   m_ObjectHideFlags: 0

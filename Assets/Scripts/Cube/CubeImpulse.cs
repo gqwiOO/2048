@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class CubeImpulse : MonoBehaviour
 {
-    [SerializeField] private float _impulse;
-    void Start()
-    {
-
-    }
+    [SerializeField] private float _ForwardImpulse;
+    [SerializeField] private float _UpImpulse;
 
     public void SetImpulse()
     {
-
-        GetComponent<Rigidbody>().AddForce(Vector3.forward * _impulse, ForceMode.Impulse);
+        GetComponent<Rigidbody>().AddForce(Vector3.forward * _ForwardImpulse, ForceMode.Impulse);
     }
 
-    // Update is called once per frame
-    void Update()
+
+    public void SetUpImpulse()
     {
+        GetComponent<Rigidbody>().AddForce(Vector3.up * _UpImpulse, ForceMode.Impulse);
     }
 }

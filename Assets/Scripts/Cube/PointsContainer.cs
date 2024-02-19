@@ -9,7 +9,7 @@ public class PointsContainer : MonoBehaviour
     [SerializeField] public List<TextMeshProUGUI> Fields;
     public int Value;
 
-    public void SetValueOnStart()
+    public int SetValueOnStart()
     {
         if(Random.Range(0f,1.0f) <= .75f)
         {
@@ -26,9 +26,10 @@ public class PointsContainer : MonoBehaviour
             {
                 field.text = $"{Value}";
             }
-
         }
+        return Value;
     }
+
 
     public void UpdateValue()
     {
@@ -38,6 +39,4 @@ public class PointsContainer : MonoBehaviour
             field.text = $"{Value}";
         }
     }
-
-
 }

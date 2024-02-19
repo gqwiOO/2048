@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class Score : MonoBehaviour
 {
-    public static int ScoreValue = 0;
+    [HideInInspector] public static int ScoreValue = 0;
+    private GUIStyle _GUIStyle;
 
+
+    private void Start()
+    {
+        _GUIStyle = new GUIStyle();
+        _GUIStyle.fontSize = 48;
+
+    }
     private void OnGUI()
     {
-        GUI.Box(new Rect(100, 100, 100, 100), ScoreValue.ToString());
+        GUI.Label(new Rect(100, 100, 200, 200), ScoreValue.ToString(), _GUIStyle);
     }
 }

@@ -1,80 +1,84 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SideMovement : MonoBehaviour
 {
     [SerializeField] public GameObject LeftBorder;
     [SerializeField] public GameObject RightBorder;
-    [SerializeField] public GameObject currentCube;
+    [HideInInspector] public GameObject CurrentCube;
 
-
-    private Vector3 previousPosition;
-    private Vector3 currentPosition;
-    private bool isSwiping;
-    private Vector3 diff;
+    private GameObject CubeForFactory;
+    private Vector3 _previousPosition;
+    private Vector3 _currentPosition;
+    private bool _isSwiping;
+    private Vector3 _diff;
 
 
     private void Update()
     {
-        if (Input.GetMouseButton(0) && currentCube != null)
+        if (Input.GetMouseButton(0) && CurrentCube != null)
         {
-            if (isSwiping)
+            if (_isSwiping)
             {
-                currentPosition = Input.mousePosition;
-                diff = currentPosition - previousPosition;
-                if(previousPosition != Vector3.zero)
+                _currentPosition = Input.mousePosition;
+                _diff = _currentPosition - _previousPosition;
+                if(_previousPosition != Vector3.zero)
                 {
-                    diff = new Vector3(diff.x * Time.deltaTime * 0.5f, 0, 0);
+                    _diff = new Vector3(_diff.x * Time.deltaTime * 0.5f, 0, 0);
                 }
                 else
                 {
-                    diff = Vector3.zero;
+                    _diff = Vector3.zero;
 
                 }
-                previousPosition = Input.mousePosition;
+                _previousPosition = Input.mousePosition;
 
 
-                if (currentCube.transform.position.x > LeftBorder.GetComponent<Transform>().position.x)
+                // To move cube when its outside of borders
+
+                if(CurrentCube.transform.position.x <= LeftBorder.GetComponent<Transform>().position.x && _diff.x > 0)
                 {
-                    currentCube.GetComponent<CubeMovement>().ModifyPosition(diff);
+                    CurrentCube.GetComponent<CubeMovement>().ModifyPosition(_diff);
                     return;
                 }
-                else
+                if (CurrentCube.transform.position.x >= RightBorder.GetComponent<Transform>().position.x && _diff.x < 0)
                 {
-                    currentCube.transform.position = LeftBorder.GetComponent<Transform>().position;
-                }
-                if (currentCube.transform.position.x < RightBorder.GetComponent<Transform>().position.x)
-                {
-                    currentCube.GetComponent<CubeMovement>().ModifyPosition(diff);
+                    CurrentCube.GetComponent<CubeMovement>().ModifyPosition(_diff);
                     return;
                 }
-                else
+
+                // To move cube when its inside of borders
+
+                if (CurrentCube.transform.position.x > LeftBorder.GetComponent<Transform>().position.x &&
+                    CurrentCube.transform.position.x < RightBorder.GetComponent<Transform>().position.x
+                    )
                 {
-                    currentCube.transform.position = RightBorder.GetComponent<Transform>().position;
+                    CurrentCube.GetComponent<CubeMovement>().ModifyPosition(_diff);
+                    return;
                 }
-                return;
+
             }
-            isSwiping = true;
+            _isSwiping = true;
 
         }
         else
         {
-            if (isSwiping)
+            if (_isSwiping)
             {
-                isSwiping = false;
-                previousPosition = Vector3.zero;
-                currentCube.GetComponent<CubeImpulse>().SetImpulse();
-                currentCube = null;
+                _isSwiping = false;
+                _previousPosition = Vector3.zero;
+                CurrentCube.GetComponent<CubeImpulse>().SetImpulse();
+                GetComponent<CubeSound>().PlaySound();
                 Invoke("AnotherCreateCubeIDKHOWTODOTHISRIGHT", GetComponent<SpawnCube>().spawner.Delay);
+                CubeForFactory = CurrentCube;
+                CurrentCube = null;
+
             }
         }
     }
     void AnotherCreateCubeIDKHOWTODOTHISRIGHT()
     {
-        currentCube = GetComponent<SpawnCube>().Create();
+        CubeFactory.AddCube(CubeForFactory);
+        CurrentCube = GetComponent<SpawnCube>().Create();
     }
 
 

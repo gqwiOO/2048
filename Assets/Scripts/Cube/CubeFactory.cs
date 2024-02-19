@@ -6,23 +6,46 @@ using UnityEngine;
 public class CubeFactory : MonoBehaviour
 {
     public static List<GameObject> CubeList = new List<GameObject>();
-    [SerializeField] private  GameObject LoseLine;
+    [SerializeField] private GameObject LoseLine;
+    public static GameObject LoseLineStatic;
 
-    public  void AddCube(GameObject cube)
+
+    private void Start()
+    {
+        LoseLineStatic = LoseLine;
+    }
+
+
+    public static void AddCube(GameObject cube)
     {
         CubeList.Add(cube);
     }
 
-    public void RemoveCube(GameObject cube)
+
+    public static void RemoveCube(GameObject cube)
     {
         CubeList.Remove(cube);
     }
 
-    public bool CheckIfAnyCubeOutOfLine()
+
+    public static bool CheckIfAnyCubeOutOfLine()
     {
         foreach (var cube in CubeList)
         {
-            if(cube.GetComponent<Transform>().position.z < LoseLine.transform.position.z)
+            if(cube != null && cube.GetComponent<Transform>().position.z < LoseLineStatic.transform.position.z)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public static bool CheckIfAnyCubeIs2048()
+    {
+        foreach (var cube in CubeList)
+        {
+            if (cube != null && cube.GetComponent<PointsContainer>().Value == 2048)
             {
                 return true;
             }

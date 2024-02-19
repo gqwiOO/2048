@@ -8,7 +8,7 @@ public class SpawnCube : MonoBehaviour
 
     void Start()
     {
-        GetComponent<SideMovement>().currentCube = Create();
+        GetComponent<SideMovement>().CurrentCube = Create();
     }
 
     // Update is called once per frame
