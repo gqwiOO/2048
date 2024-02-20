@@ -15,4 +15,7 @@ public class Spawner : MonoBehaviour
         obj.GetComponent<CubeMaterials>().SetMaterial(obj.GetComponent<PointsContainer>().SetValueOnStart());
         return obj;
     }
+
+
+
 }

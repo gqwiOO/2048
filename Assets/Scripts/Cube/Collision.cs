@@ -12,8 +12,7 @@ public class Collision : MonoBehaviour
             GetComponent<PointsContainer>().Value)
         {
             Score.ScoreValue += collision.gameObject.GetComponent<PointsContainer>().Value / 2;
-            collision.gameObject.GetComponent<CubeImpulse>().SetUpImpulse();
-
+            
             GetComponent<CubeImpulse>().SetUpImpulse();
             GetComponent<CubeMaterials>().SetMaterial(GetComponent<PointsContainer>().Value * 2);
             GetComponent<PointsContainer>().UpdateValue();

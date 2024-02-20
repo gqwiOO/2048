@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    private GameState _gameState = GameState.Playing;
+    public static State GameState = State.Playing;
 
     private GUIStyle _GUIStyle;
 
@@ -20,11 +20,11 @@ public class GameController : MonoBehaviour
     {
         if (CubeFactory.CheckIfAnyCubeOutOfLine())
         {
-            _gameState = GameState.Lose;
+            GameState = State.Lose;
         }
         if (CubeFactory.CheckIfAnyCubeIs2048())
         {
-            _gameState = GameState.Win;
+            GameState = State.Win;
         }
     }
 
@@ -34,17 +34,17 @@ public class GameController : MonoBehaviour
 
         float width = 400;
         float height = 400;
-        if (_gameState == GameState.Lose )
+        if (GameState == State.Lose )
         {
             GUI.Label(new Rect(Screen.width / 2 - width / 4, (Screen.height - height) / 2, width, height), "you lose!", _GUIStyle);
         }
-        if(_gameState == GameState.Win )
+        if(GameState == State.Win )
         {
             GUI.Label(new Rect(Screen.width / 2 - width / 4,(Screen.height - height) / 2, width, height), "You Win!", _GUIStyle);
         }
     }
 
-    enum GameState
+    public enum State
     {
         Lose,
         Win,
